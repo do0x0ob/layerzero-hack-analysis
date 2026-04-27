@@ -5,7 +5,13 @@
       "WebSearch",
       "WebFetch(domain:defiprime.com)",
       "WebFetch(domain:governance.aave.com)",
-      "Bash(python3)"
+      "Bash(python3)",
+      "WebFetch(domain:defiunited.world)",
+      "WebFetch(domain:defiunited.fyi)",
+      "Bash(sips -g pixelWidth -g pixelHeight \"/Users/june/Projects/Water Labs/layerzero-hack-analysis/KelpDAO.png\")",
+      "Bash(git -C \"/Users/june/Projects/Water Labs/layerzero-hack-analysis\" add .claude/settings.local.json slides.html)",
+      "Bash(git -C '/Users/june/Projects/Water Labs/layerzero-hack-analysis' commit -m ' *)",
+      "Bash(git -C \"/Users/june/Projects/Water Labs/layerzero-hack-analysis\" status)"
     ]
   }
 }

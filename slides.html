@@ -1218,14 +1218,19 @@
   /* FLOW IMAGE (Page 05) */
   .flow-image {
     margin-top: 16px;
-    padding: 24px;
+    padding: 16px;
     background: var(--paper);
     border: 1px solid var(--rule);
     text-align: center;
+    width: calc(100vw - 144px);
+    max-width: 1600px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
   }
   .flow-image img {
     width: 100%;
-    max-width: 920px;
+    max-width: 1560px;
     height: auto;
     display: block;
     margin: 0 auto;
@@ -2261,19 +2266,19 @@
       </div>
 
       <div class="defi-united" style="margin-top: 0; padding-top: 0; border-top: none;">
-        <p class="summary">由 Aave 主導發起,以產業集資填補 rsETH 抵押缺口,可能成為「系統性風險共擔」的產業範本。</p>
+        <p class="summary">由 Aave 主導發起,以產業集資填補 rsETH 抵押缺口。<strong style="color: var(--ok);">4/26 宣佈募資目標已達成</strong>,惟仍待各 DAO 投票通過與實際執行。</p>
         <div class="stats">
           <div class="stat">
             <div class="label">累計承諾</div>
-            <div class="value">~100,378 <span class="unit">ETH</span></div>
+            <div class="value">~102,442 <span class="unit">ETH</span></div>
           </div>
           <div class="stat">
             <div class="label">達標進度</div>
-            <div class="value">86.2<span class="unit">%</span></div>
+            <div class="value" style="color: var(--ok);">目標已達<span class="unit">*</span></div>
           </div>
           <div class="stat">
             <div class="label">參與錢包</div>
-            <div class="value">101,610 <span class="unit">addrs</span></div>
+            <div class="value">116,000+ <span class="unit">addrs</span></div>
           </div>
         </div>
         <div class="alliance-list">
@@ -2283,7 +2288,11 @@
           <div class="item"><span class="who">Stani Kulechov</span><span class="amt">5,000 ETH</span></div>
           <div class="item"><span class="who">Ether.fi</span><span class="amt">5,000 ETH</span></div>
           <div class="item"><span class="who">Lido</span><span class="amt">2,500 ETH</span></div>
+          <div class="item"><span class="who">Kelp DAO</span><span class="amt">2,000 ETH</span></div>
+          <div class="item"><span class="who">Golem Foundation</span><span class="amt">1,000 ETH</span></div>
+          <div class="item"><span class="who">Babylon Foundation</span><span class="amt">$3M USDT</span></div>
         </div>
+        <p style="font-size: 12px; color: var(--muted); margin-top: 6px;">* 仍待 pending votes、indicative agreements 與實際執行;成功取決於 KelpDAO 重開提領及 Arbitrum Security Council 釋出凍結 ETH。</p>
         <div class="alliance-links">
           <span class="link-label">Live Tracker</span>
           <a href="https://defiunited.world/" target="_blank" rel="noopener">defiunited.world ↗</a>
