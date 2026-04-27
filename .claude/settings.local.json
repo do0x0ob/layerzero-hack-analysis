@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mgrep --web --answer \"KelpDAO rsETH exploit April 2026 bad debt resolution decision socialize Aave DeFi United\")",
+      "WebSearch",
+      "WebFetch(domain:defiprime.com)",
+      "WebFetch(domain:governance.aave.com)",
+      "Bash(python3)"
+    ]
+  }
+}
