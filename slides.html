@@ -2099,110 +2099,6 @@
     </div>
   </section>
 
-  <!-- ===== 12: §04 DEBATE ===== -->
-  <section class="slide" data-slide="12">
-    <div class="slide-inner">
-      <div class="slide-head">
-        <div class="num">§ 04</div>
-        <h2>誰該負責？<em>— 仍在辯論中</em></h2>
-      </div>
-      <div class="prose" style="margin-bottom: 24px;">
-        <p>
-          事件後 48 小時內，LayerZero 與 KelpDAO 在公開場合互相指責。
-          雙方說法都有根據，但指向的是不同層次的責任。
-        </p>
-      </div>
-
-      <div class="debate">
-        <div class="party">
-          <div class="who">LayerZero 的立場</div>
-          <h4>「協定沒漏洞，是 Kelp 選了不安全配置。」</h4>
-          <ul>
-            <li>協定本身完全照預期運作，無 vulnerability</li>
-            <li>曾多次建議 Kelp 採用 multi-DVN 冗餘</li>
-            <li>模組化安全讓衝擊隔離 — zero contagion</li>
-            <li>宣布從此不為任何 1/1 DVN 應用簽訊息</li>
-          </ul>
-        </div>
-        <div class="party">
-          <div class="who">KelpDAO 的反駁</div>
-          <h4>「被攻破的是 LayerZero 自己的基礎設施。」</h4>
-          <ul>
-            <li>LayerZero V2 Quickstart 範例就是 1/1 配置</li>
-            <li>約 40% 接入 LayerZero 的協議採相同配置</li>
-            <li>直接溝通管道自 2024/7 起，從未收到改配置具體建議</li>
-            <li>被污染的 RPC、op-geth、DVN — 全是 LayerZero 自營</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== 13: §05 TAKEAWAYS ===== -->
-  <section class="slide" data-slide="13">
-    <div class="slide-inner">
-      <div class="slide-head">
-        <div class="num">§ 05</div>
-        <h2>對我們的啟示</h2>
-      </div>
-      <div class="takeaways">
-        <div class="take">
-          <div>
-            <h4>信任鏈的最弱一環決定系統強度</h4>
-            <p>
-              密碼學再強，如果驗證者讀到的「鏈上事實」來自可被替換的
-              <span class="term"><code>binary</code><span class="tip"><span class="tip-label">Executable Binary</span><span class="tip-title">執行檔</span>編譯後的可執行程式檔，例如這次事件中被替換的 <code style="background: rgba(255,255,255,0.1); color: var(--paper);">op-geth</code>。攻擊者把節點的 binary 換成惡意版本，就能在不被察覺的情況下控制節點的對外行為。</span></span>，
-              加密機制就被架空了。
-              <strong>
-                <span class="term"><code>provenance</code><span class="tip"><span class="tip-label">Data Provenance</span><span class="tip-title">資料來源鏈</span>一份資料從產生、流經哪些處理者、到最終被使用的完整歷程紀錄。有 provenance 才能追溯「這個結論憑什麼成立」。這次事件中 DVN 讀取的「鏈上事實」沒有可驗證的 provenance — 它只能相信 RPC 節點「現在告訴我的是真的」。</span></span>
-                的可驗證性必須延伸到資料入口
-              </strong>。
-            </p>
-          </div>
-        </div>
-        <div class="take">
-          <div>
-            <h4>Redundancy 如果沒有 dissent 機制，就只是備援</h4>
-            <p>
-              多個 RPC 之間沒有相互核實、多個 DVN 之間沒有
-              <span class="term"><code>quorum</code><span class="tip"><span class="tip-label">Quorum-based Verification</span><span class="tip-title">多方共識門檻</span>要求 N 個驗證者中至少 K 個達成一致，才認定訊息有效（例如 2-of-3、3-of-5）。LayerZero 的 multi-DVN 建議就是 quorum 模型。<strong>KelpDAO 的 1-of-1 等於沒有 quorum</strong> — 只要欺騙唯一的那個就過關。</span></span>
-              <span class="term"><code>dissent</code><span class="tip"><span class="tip-label">Dissent Detection</span><span class="tip-title">異議偵測</span>當多方驗證者之間出現不一致時，系統主動偵測並拒絕簽章的機制。只有 redundancy 沒有 dissent detection，等於多個備援都乖乖跟著錯的來源走，不會舉手說「我看到的不一樣」。</span></span>
-              偵測 ——
-              redundancy 只能提供
-              <span class="term tip-below"><code>availability</code><span class="tip"><span class="tip-label">Availability</span><span class="tip-title">可用性</span>系統「還活著」、能繼續回應請求。壞了一個就切換到備援，服務不中斷。但「能回應」不等於「回應是正確的」。</span></span>，
-              無法提供
-              <span class="term tip-below"><code>integrity</code><span class="tip"><span class="tip-label">Integrity</span><span class="tip-title">完整性 / 正確性</span>回傳的資料真的是原始、未被竄改的。需要密碼學驗證或多方比對才能保證。這次事件中備援切過去後 RPC 「還能回應」（availability 沒事），但回應是假的（integrity 完全失守）。</span></span>。
-            </p>
-          </div>
-        </div>
-        <div class="take">
-          <div>
-            <h4>「建議」不等於「預設」</h4>
-            <p>
-              如果官方
-              <span class="term tip-below"><code>Quickstart</code><span class="tip"><span class="tip-label">Official Starter Template</span><span class="tip-title">官方快速入門範本</span>LayerZero V2 OApp Quickstart 是新接入者的起始樣板。該範本預設配置為 1/1 DVN，也就是單一驗證者。KelpDAO 反駁就是抓這點：約 40% 的現役協議都沿用此預設配置。</span></span>
-              的預設是 1/1，不能單純怪應用端沒照建議。
-              在設計跨鏈訊息或
-              <span class="term tip-below"><code>oracle</code><span class="tip"><span class="tip-label">Oracle</span><span class="tip-title">外部資料餵送器</span>把鏈下資料（價格、事件、跨鏈狀態）送上鏈的服務。DVN 本質上就是跨鏈訊息的 oracle。oracle 的可信度直接決定了依賴它的合約是否安全。</span></span>
-              路徑時，<strong>預設配置就是責任配置</strong>。
-            </p>
-          </div>
-        </div>
-        <div class="take">
-          <div>
-            <h4>Off-chain 基礎設施需要 on-chain 的驗證意識</h4>
-            <p>
-              RPC、
-              <span class="term tip-below"><code>indexer</code><span class="tip"><span class="tip-label">Blockchain Indexer</span><span class="tip-title">鏈上資料索引服務</span>把原始鏈上資料整理成可查詢的結構化資料庫（例如 The Graph、LayerZero Scan）。DApp 和監控系統大多依賴 indexer 取代逐筆查 RPC。這次事件中 LayerZero 自己的 Scan indexer 也被瞞過 — 因為它們也是從 RPC 拉資料的。</span></span>、
-              oracle 這些「周邊」服務，<strong>實際上扛著整個系統的信任核心</strong>。
-              未來的跨鏈設計，需要思考如何讓這些元件的行為本身可被密碼學驗證。
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ===== 19: 攻擊流程圖解(回顧) ===== -->
   <section class="slide" data-slide="19">
     <div class="slide-inner">
@@ -2466,6 +2362,110 @@
           </tr>
         </tbody>
       </table>
+    </div>
+  </section>
+
+  <!-- ===== 12: §04 DEBATE ===== -->
+  <section class="slide" data-slide="12">
+    <div class="slide-inner">
+      <div class="slide-head">
+        <div class="num">§ 04</div>
+        <h2>誰該負責？<em>— 仍在辯論中</em></h2>
+      </div>
+      <div class="prose" style="margin-bottom: 24px;">
+        <p>
+          事件後 48 小時內，LayerZero 與 KelpDAO 在公開場合互相指責。
+          雙方說法都有根據，但指向的是不同層次的責任。
+        </p>
+      </div>
+
+      <div class="debate">
+        <div class="party">
+          <div class="who">LayerZero 的立場</div>
+          <h4>「協定沒漏洞，是 Kelp 選了不安全配置。」</h4>
+          <ul>
+            <li>協定本身完全照預期運作，無 vulnerability</li>
+            <li>曾多次建議 Kelp 採用 multi-DVN 冗餘</li>
+            <li>模組化安全讓衝擊隔離 — zero contagion</li>
+            <li>宣布從此不為任何 1/1 DVN 應用簽訊息</li>
+          </ul>
+        </div>
+        <div class="party">
+          <div class="who">KelpDAO 的反駁</div>
+          <h4>「被攻破的是 LayerZero 自己的基礎設施。」</h4>
+          <ul>
+            <li>LayerZero V2 Quickstart 範例就是 1/1 配置</li>
+            <li>約 40% 接入 LayerZero 的協議採相同配置</li>
+            <li>直接溝通管道自 2024/7 起，從未收到改配置具體建議</li>
+            <li>被污染的 RPC、op-geth、DVN — 全是 LayerZero 自營</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 13: §05 TAKEAWAYS ===== -->
+  <section class="slide" data-slide="13">
+    <div class="slide-inner">
+      <div class="slide-head">
+        <div class="num">§ 05</div>
+        <h2>對我們的啟示</h2>
+      </div>
+      <div class="takeaways">
+        <div class="take">
+          <div>
+            <h4>信任鏈的最弱一環決定系統強度</h4>
+            <p>
+              密碼學再強，如果驗證者讀到的「鏈上事實」來自可被替換的
+              <span class="term"><code>binary</code><span class="tip"><span class="tip-label">Executable Binary</span><span class="tip-title">執行檔</span>編譯後的可執行程式檔，例如這次事件中被替換的 <code style="background: rgba(255,255,255,0.1); color: var(--paper);">op-geth</code>。攻擊者把節點的 binary 換成惡意版本，就能在不被察覺的情況下控制節點的對外行為。</span></span>，
+              加密機制就被架空了。
+              <strong>
+                <span class="term"><code>provenance</code><span class="tip"><span class="tip-label">Data Provenance</span><span class="tip-title">資料來源鏈</span>一份資料從產生、流經哪些處理者、到最終被使用的完整歷程紀錄。有 provenance 才能追溯「這個結論憑什麼成立」。這次事件中 DVN 讀取的「鏈上事實」沒有可驗證的 provenance — 它只能相信 RPC 節點「現在告訴我的是真的」。</span></span>
+                的可驗證性必須延伸到資料入口
+              </strong>。
+            </p>
+          </div>
+        </div>
+        <div class="take">
+          <div>
+            <h4>Redundancy 如果沒有 dissent 機制，就只是備援</h4>
+            <p>
+              多個 RPC 之間沒有相互核實、多個 DVN 之間沒有
+              <span class="term"><code>quorum</code><span class="tip"><span class="tip-label">Quorum-based Verification</span><span class="tip-title">多方共識門檻</span>要求 N 個驗證者中至少 K 個達成一致，才認定訊息有效（例如 2-of-3、3-of-5）。LayerZero 的 multi-DVN 建議就是 quorum 模型。<strong>KelpDAO 的 1-of-1 等於沒有 quorum</strong> — 只要欺騙唯一的那個就過關。</span></span>
+              <span class="term"><code>dissent</code><span class="tip"><span class="tip-label">Dissent Detection</span><span class="tip-title">異議偵測</span>當多方驗證者之間出現不一致時，系統主動偵測並拒絕簽章的機制。只有 redundancy 沒有 dissent detection，等於多個備援都乖乖跟著錯的來源走，不會舉手說「我看到的不一樣」。</span></span>
+              偵測 ——
+              redundancy 只能提供
+              <span class="term tip-below"><code>availability</code><span class="tip"><span class="tip-label">Availability</span><span class="tip-title">可用性</span>系統「還活著」、能繼續回應請求。壞了一個就切換到備援，服務不中斷。但「能回應」不等於「回應是正確的」。</span></span>，
+              無法提供
+              <span class="term tip-below"><code>integrity</code><span class="tip"><span class="tip-label">Integrity</span><span class="tip-title">完整性 / 正確性</span>回傳的資料真的是原始、未被竄改的。需要密碼學驗證或多方比對才能保證。這次事件中備援切過去後 RPC 「還能回應」（availability 沒事），但回應是假的（integrity 完全失守）。</span></span>。
+            </p>
+          </div>
+        </div>
+        <div class="take">
+          <div>
+            <h4>「建議」不等於「預設」</h4>
+            <p>
+              如果官方
+              <span class="term tip-below"><code>Quickstart</code><span class="tip"><span class="tip-label">Official Starter Template</span><span class="tip-title">官方快速入門範本</span>LayerZero V2 OApp Quickstart 是新接入者的起始樣板。該範本預設配置為 1/1 DVN，也就是單一驗證者。KelpDAO 反駁就是抓這點：約 40% 的現役協議都沿用此預設配置。</span></span>
+              的預設是 1/1，不能單純怪應用端沒照建議。
+              在設計跨鏈訊息或
+              <span class="term tip-below"><code>oracle</code><span class="tip"><span class="tip-label">Oracle</span><span class="tip-title">外部資料餵送器</span>把鏈下資料（價格、事件、跨鏈狀態）送上鏈的服務。DVN 本質上就是跨鏈訊息的 oracle。oracle 的可信度直接決定了依賴它的合約是否安全。</span></span>
+              路徑時，<strong>預設配置就是責任配置</strong>。
+            </p>
+          </div>
+        </div>
+        <div class="take">
+          <div>
+            <h4>Off-chain 基礎設施需要 on-chain 的驗證意識</h4>
+            <p>
+              RPC、
+              <span class="term tip-below"><code>indexer</code><span class="tip"><span class="tip-label">Blockchain Indexer</span><span class="tip-title">鏈上資料索引服務</span>把原始鏈上資料整理成可查詢的結構化資料庫（例如 The Graph、LayerZero Scan）。DApp 和監控系統大多依賴 indexer 取代逐筆查 RPC。這次事件中 LayerZero 自己的 Scan indexer 也被瞞過 — 因為它們也是從 RPC 拉資料的。</span></span>、
+              oracle 這些「周邊」服務，<strong>實際上扛著整個系統的信任核心</strong>。
+              未來的跨鏈設計，需要思考如何讓這些元件的行為本身可被密碼學驗證。
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
